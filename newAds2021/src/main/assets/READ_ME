@@ -1,0 +1,45 @@
+
+--> for Banner
+        layout="@layout/banner_ad_layout"
+        showBannerAd()
+        showLargeBannerAd()
+--> for Native
+        layout="@layout/native_ad_layout_small"
+        layout="@layout/native_ad_layout"
+        showNativeAd()
+--> Native ad for Dialog
+         showNativeAdDialog(Dialog dialog)
+--> Native ad for Adpater
+        showNativeAdAdapter(templateView, cardView)
+--> BaseActivity
+        ConstantAds.setAdsUrlID("https://script.google.com/macros/s/AKfycbwWa0oIwNsZ4b7b-aIGi61iyJ98XFCy2kbfXNC-ZhiIkHtlHu2R88r-gzHc7eigJykh7A/");
+        ConstantAds.setIHAdsID("https://script.google.com/macros/s/AKfycbwV0QJZQ0bg6w_Rqc4w84OFv4cUSI_YZuKKd-exgyFzw-lXSyJ6vbV8-cT1kUBc4MZWwA/");
+        -> Preload Ads will load all 3 ads
+        ConstantAds.preloadAppopen(true);
+        ConstantAds.preloadInterstitial(true);
+        ConstantAds.preloadRewarded(true);
+--> AppService
+        --> In Activity After Splash
+        AppService(String versionName) //for update, notification & ads
+        --> In Any Activity
+        AppAdDialog() // only for app dialog
+
+--> Validate Install
+        validateInstall(new Callable<Void>() {
+            @Override
+            public Void call() throws Exception {
+                toast("invalid");
+
+                return null;
+            }
+        });
+--> Rewarded Ads
+
+        If not preloaded
+        -> Load Ads
+        loadRewardAd1(),loadRewardAd2(),loadRewardAd3()
+        -> Show Ads
+        showRewardAd1( onRewardAdClosedListener )
+        showRewardAd2( onRewardAdClosedListener )
+        showRewardAd3( onRewardAdClosedListener )
+
