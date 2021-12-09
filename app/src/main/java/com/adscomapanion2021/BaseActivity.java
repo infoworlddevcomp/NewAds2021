@@ -27,6 +27,7 @@ public class BaseActivity extends BaseAdsClass {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ConstantAds.setAdsURL("");
         ConstantAds.setAdsUrlID("https://script.google.com/macros/s/AKfycbwWa0oIwNsZ4b7b-aIGi61iyJ98XFCy2kbfXNC-ZhiIkHtlHu2R88r-gzHc7eigJykh7A/");
         ConstantAds.setIHAdsID("https://script.google.com/macros/s/AKfycbwV0QJZQ0bg6w_Rqc4w84OFv4cUSI_YZuKKd-exgyFzw-lXSyJ6vbV8-cT1kUBc4MZWwA/");
         ConstantAds.preloadAppopen(true);

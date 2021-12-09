@@ -132,9 +132,7 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
                 if (!isLoaded_ADS) {
                     getAds();
                 }
-                if (!isLoaded_IH) {
-                    getInHouseAds();
-                }
+
                 return null;
             }
         });
@@ -154,10 +152,13 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
             public void onResponse(@NonNull Call<AdsDetails> call, @NonNull Response<AdsDetails> response) {
                 AdsDetails adsDetails = response.body();
                 adsDetailsArrayList = new ArrayList<>();
+                ihAdsDetails = new ArrayList<>();
                 try {
                     if (adsDetails.getAdsData() != null) {
                         adsDetailsArrayList = adsDetails.getAdsData();
+                        ihAdsDetails = adsDetails.getIhAdsDetail();
                         AdsData ads = adsDetailsArrayList.get(0);
+
                         adsPrefernce = new AdsPrefernce(BaseAdsClass.this);
                         if (adsDetailsArrayList != null && adsDetailsArrayList.size() > 0) {
                             adsPrefernce.setAdsDefaults(ads.getShowAds(), ads.getAdsCount(), ads.getShowLoading(), ads.getAllowAccess(), ads.getAppAdDialogCount(),
@@ -194,31 +195,8 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
                             }
 
                         }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
 
-                }
-            }
 
-            @Override
-            public void onFailure(@NonNull Call<AdsDetails> call, @NonNull Throwable t) {
-
-            }
-        });
-    }
-
-    public void getInHouseAds() {
-        moreAppsArrayList = new ArrayList<>();
-        finalIHAds = new ArrayList<>();
-        ihAdsDetails = new ArrayList<>();
-        IHAPI.apiInterface().getIHAds().enqueue(new retrofit2.Callback<IHAdsData>() {
-            @Override
-            public void onResponse(@NonNull Call<IHAdsData> call, @NonNull Response<IHAdsData> response) {
-                IHAdsData ihAdsData = response.body();
-                try {
-                    if (ihAdsData.getIhAdsDetail() != null) {
-                        ihAdsDetails = ihAdsData.getIhAdsDetail();
                         if (ihAdsDetails != null && ihAdsDetails.size() > 0) {
                             moreAppsArrayList.clear();
                             for (int i = 0; i < ihAdsDetails.size(); i++) {
@@ -287,17 +265,23 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
 
                         }
                     }
+
                 } catch (Exception e) {
                     e.printStackTrace();
 
                 }
+
+
             }
 
             @Override
-            public void onFailure(@NonNull Call<IHAdsData> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<AdsDetails> call, @NonNull Throwable t) {
+
             }
         });
     }
+
+
 
     boolean verifyInstallerId(Context context) {
         List<String> validInstallers = new ArrayList<>(Arrays.asList("com.android.vending", "com.google.android.feedback"));
@@ -2036,7 +2020,7 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
 
     }
 
-    void showInterstitial1(Context context, Callable<Void> params) {
+    public void showInterstitial1(Context context, Callable<Void> params) {
         if (currentAD % adsPrefernce.adCount() == 0 && isConnected(this) && adsPrefernce.showInter1()) {
             if (mInterstitialAd1 != null) {
                 if (adsPrefernce.showloading()) {
@@ -2130,7 +2114,7 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
         currentAD++;
     }
 
-    void showInterstitial2(Context context, Callable<Void> params) {
+    public void showInterstitial2(Context context, Callable<Void> params) {
         if (currentAD % adsPrefernce.adCount() == 0 && isConnected(this) && adsPrefernce.showInter2()) {
             if (mInterstitialAd2 != null) {
                 if (adsPrefernce.showloading()) {
@@ -2225,7 +2209,7 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
 
     }
 
-    void showInterstitial3(Context context, Callable<Void> params) {
+    public void showInterstitial3(Context context, Callable<Void> params) {
         if (currentAD % adsPrefernce.adCount() == 0 && isConnected(this) && adsPrefernce.showInter3()) {
             if (mInterstitialAd3 != null) {
                 if (adsPrefernce.showloading()) {
@@ -2562,7 +2546,7 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
         }
     }
 
-    void showLargeBanner3() {
+    public void showLargeBanner3() {
         if (isConnected(this) && adsPrefernce.showBanner3()) {
             LinearLayout adContainer = (LinearLayout) this.findViewById(R.id.banner_adView);
             AdView mAdView = new AdView(this);
@@ -2733,7 +2717,7 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
         }
     }
 
-    void showNativeAd1() {
+    public void showNativeAd1() {
         if (isConnected(this) && adsPrefernce.showNative1()) {
             AdLoader adLoader = new AdLoader.Builder(this, adsPrefernce.gNative1())
                     .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
@@ -3242,9 +3226,7 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
                 if (!isLoaded_ADS) {
                     getAds();
                 }
-                if (!isLoaded_IH) {
-                    getInHouseAds();
-                }
+
                 return null;
             }
         });

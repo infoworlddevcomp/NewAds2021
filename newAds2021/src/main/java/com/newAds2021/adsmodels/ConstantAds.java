@@ -24,6 +24,9 @@ public class ConstantAds {
     public static String ihAdsID = "";
     public static String ihInterID = "";
     public static String ihNativeID = "";
+    public static String setAdsURL(String url){
+        return adUrlId = url;
+    }
     public static String setIHAdsID(String url){
         return ihAdsID = url;
     }
@@ -60,6 +63,8 @@ public class ConstantAds {
             pDialog.dismiss();
         }
     }
+
+
 }
 
 
