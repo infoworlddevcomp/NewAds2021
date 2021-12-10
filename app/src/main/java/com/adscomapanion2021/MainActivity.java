@@ -116,6 +116,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onAdLoaded() {
                 findViewById(R.id.native_ad_container).setVisibility(View.VISIBLE);
+
             }
 
             @Override

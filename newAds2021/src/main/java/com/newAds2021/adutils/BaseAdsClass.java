@@ -126,11 +126,11 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
         isvalidInstall = verifyInstallerId(this);
 
 
-        withDelay(500, new Callable<Void>() {
+        withDelay(2000, new Callable<Void>() {
             @Override
             public Void call() throws Exception {
                 if (!isLoaded_ADS) {
-                    getAds();
+                    getAdsx();
                 }
 
                 return null;
@@ -146,8 +146,8 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
 
     }
 
-    public void getAds() {
-        API.apiInterface().getAds().enqueue(new retrofit2.Callback<AdsDetails>() {
+    public void getAdsx() {
+        API.apiInterface().getAds(ConstantAds.adUrlId).enqueue(new retrofit2.Callback<AdsDetails>() {
             @Override
             public void onResponse(@NonNull Call<AdsDetails> call, @NonNull Response<AdsDetails> response) {
                 AdsDetails adsDetails = response.body();
@@ -198,6 +198,8 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
 
 
                         if (ihAdsDetails != null && ihAdsDetails.size() > 0) {
+                            moreAppsArrayList = new ArrayList<>();
+                            finalIHAds = new ArrayList<>();
                             moreAppsArrayList.clear();
                             for (int i = 0; i < ihAdsDetails.size(); i++) {
                                 if (ihAdsDetails.get(i).getShowad()) {
@@ -3224,7 +3226,7 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
             @Override
             public Void call() throws Exception {
                 if (!isLoaded_ADS) {
-                    getAds();
+                    getAdsx();
                 }
 
                 return null;

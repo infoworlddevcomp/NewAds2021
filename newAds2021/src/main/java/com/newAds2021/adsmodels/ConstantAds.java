@@ -9,8 +9,6 @@ public class ConstantAds {
 //    public static ArrayList<String> category=new ArrayList<>();
 //    public static ArrayList<ArrayList<AppsDetails>> arraylist=new ArrayList<>();
     public static Boolean isLightTheme = true;
-
-
     public static ProgressDialog pDialog = null;
     public static int adCountDefault = 1;
     public static int app_ad_dialog_default = 0;

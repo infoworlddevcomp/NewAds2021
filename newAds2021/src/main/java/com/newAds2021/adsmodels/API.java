@@ -7,8 +7,7 @@ public class API {
 
     private static <T> T builder(Class<T> endpoint) {
         return new Retrofit.Builder()
-                .baseUrl(ConstantAds.adUrlId)
-//                .baseUrl("https://script.google.com/macros/s/")
+                .baseUrl("https://script.google.com/macros/s/AKfycbwvZygN-GZ38A5THM1-_gCjMvrQRkxE6eI0D7fJrtG_fP4gUcO7qyO-eaMKrNxeiqRQ/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(endpoint);
