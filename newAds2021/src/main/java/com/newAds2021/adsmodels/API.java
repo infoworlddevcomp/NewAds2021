@@ -1,16 +1,22 @@
 package com.newAds2021.adsmodels;
 
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class API {
 
     private static <T> T builder(Class<T> endpoint) {
+
         return new Retrofit.Builder()
-                .baseUrl("https://script.google.com/macros/s/AKfycbyFbu6ZzVDmj_b3WJBDCwplJ1H7hko6jIUqj15hKGx6XX37P5bz-rU1Nj5GmnB_q6fF/")
+                .baseUrl("https://script.google.com/macros/s/AKfycbxAm4u1Q2qogy8iGimhlw_6C3l0HI9JLei4M3qMHdvWUzr17nc-j3zm7UczIEbwCNtn/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(endpoint);
+
+
     }
 
     public static ApiInterface apiInterface() {

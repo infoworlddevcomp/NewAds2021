@@ -10,15 +10,21 @@ import androidx.cardview.widget.CardView;
 import com.newAds2021.Interfaces.InhouseBannerListener;
 import com.newAds2021.Interfaces.InhouseInterstitialListener;
 import com.newAds2021.Interfaces.InhouseNativeListener;
+import com.newAds2021.adsmodels.AdsPrefernce;
+import com.newAds2021.adsmodels.ConstantAds;
 
 import java.util.concurrent.Callable;
 
 public class MainActivity extends BaseActivity {
 
+    AdsPrefernce adsPrefernce;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
 
         withDelay(3000, new Callable<Void>() {
@@ -30,6 +36,8 @@ public class MainActivity extends BaseActivity {
         });
 //        setAdsUrlID("AKfycbwWa0oIwNsZ4b7b-aIGi61iyJ98XFCy2kbfXNC-ZhiIkHtlHu2R88r-gzHc7eigJykh7A/exec");
 //        ConstantAds.setAdsUrlID("AKfycbwWa0oIwNsZ4b7b-aIGi61iyJ98XFCy2kbfXNC-ZhiIkHtlHu2R88r-gzHc7eigJykh7A/exec");
+
+
     }
 
     public void Inter1(View view) {

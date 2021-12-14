@@ -147,6 +147,7 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
     }
 
     public void getAdsx() {
+
         API.apiInterface().getAds(ConstantAds.adUrlId).enqueue(new retrofit2.Callback<AdsDetails>() {
             @Override
             public void onResponse(@NonNull Call<AdsDetails> call, @NonNull Response<AdsDetails> response) {
@@ -2549,6 +2550,7 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
     }
 
     public void showLargeBanner3() {
+
         if (isConnected(this) && adsPrefernce.showBanner3()) {
             LinearLayout adContainer = (LinearLayout) this.findViewById(R.id.banner_adView);
             AdView mAdView = new AdView(this);

@@ -10,7 +10,8 @@ public interface ApiInterface {
 
 
     @GET("exec?")
-    Call<AdsDetails> getAds(@Query("sheetid") String sheetid);
+    Call<AdsDetails> getAds(@Query("id") String id);
+
 
 
     @GET("exec")
