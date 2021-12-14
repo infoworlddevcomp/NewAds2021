@@ -20,14 +20,13 @@ import androidx.fragment.app.Fragment;
 import com.newAds2021.adsmodels.ConstantAds;
 import com.newAds2021.adutils.BaseAdsClass;
 
-
 public class BaseActivity extends BaseAdsClass {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-       // ConstantAds.setAdsURL("1w-FaPp1dmNwYi2t5zhg27B2Bm4NJR1z1xC58uknnBbo");
+        ConstantAds.setAdsURL("1tAeTZu7ds5RceTVaXTK1k7tyI94mnXuDSxJXYp6G1wY");
        // getAdsx();
         ConstantAds.preloadAppopen(true);
         ConstantAds.preloadInterstitial(true);

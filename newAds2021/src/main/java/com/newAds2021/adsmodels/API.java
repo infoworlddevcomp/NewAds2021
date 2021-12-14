@@ -7,7 +7,7 @@ public class API {
 
     private static <T> T builder(Class<T> endpoint) {
         return new Retrofit.Builder()
-                .baseUrl("https://script.google.com/macros/s/AKfycbwvZygN-GZ38A5THM1-_gCjMvrQRkxE6eI0D7fJrtG_fP4gUcO7qyO-eaMKrNxeiqRQ/")
+                .baseUrl("https://script.google.com/macros/s/AKfycbxzrS2v7cCuHT-UOnLy5b0VgapcgiXIfzk76AruCtPBOW161yc0xLsWrscKjnOhJFnu/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(endpoint);
