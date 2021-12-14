@@ -26,7 +26,7 @@ public class BaseActivity extends BaseAdsClass {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ConstantAds.setAdsURL("1tAeTZu7ds5RceTVaXTK1k7tyI94mnXuDSxJXYp6G1wY");
+        ConstantAds.setAdsURL("1w-FaPp1dmNwYi2t5zhg27B2Bm4NJR1z1xC58uknnBbo");
        // getAdsx();
         ConstantAds.preloadAppopen(true);
         ConstantAds.preloadInterstitial(true);
