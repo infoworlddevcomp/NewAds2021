@@ -179,6 +179,7 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
                         adsDetailsArrayListFB = adsDetails.getFBAdsData();
 
                         AdsData ads = adsDetailsArrayList.get(0);
+                        AdsDataFB adsfb = adsDetailsArrayListFB.get(0);
 
                         adsPrefernce = new AdsPrefernce(BaseAdsClass.this);
                         if (adsDetailsArrayList != null && adsDetailsArrayList.size() > 0) {
@@ -294,15 +295,15 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
 
 
                         if (adsDetailsArrayListFB != null && adsDetailsArrayListFB.size() > 0) {
-                            adsPrefernce.setAdsDefaultsFB(ads.getShowAds(), ads.getAdsCount(), ads.getShowLoading(), ads.getAllowAccess(), ads.getAppAdDialogCount(),
-                                    ads.getgBanner1(), ads.getgBanner2(), ads.getgBanner3(),
-                                    ads.getgInter1(), ads.getgInter2(), ads.getgInter3(), ads.getgAppopen1(), ads.getgAppopen2(), ads.getgAppopen3(),
-                                    ads.getgNative1(), ads.getgNative2(), ads.getgNative3(), ads.getgRewarded1(), ads.getgRewarded2(), ads.getgRewarded3(),
-                                    ads.getgRewardinter1(), ads.getgRewardinter2(), ads.getgRewardinter3(), ads.getShowGbanner1(), ads.getShowGbanner2(),
-                                    ads.getShowGbanner3(), ads.getShowGInter1(), ads.getShowGInter2(), ads.getShowGInter3(), ads.getShowGappopen1(),
-                                    ads.getShowGappopen2(), ads.getShowGappopen3(), ads.getShowGnative1(), ads.getShowGnative2(), ads.getShowGnative3(),
-                                    ads.getShowGrewarded1(), ads.getShowGrewarded2(), ads.getShowGrewarded3(), ads.getShowGrewardinter1(), ads.getShowGrewardinter2(),
-                                    ads.getShowGrewardinter3(), ads.getExtraPara1(), ads.getExtraPara2(), ads.getExtraPara3(), ads.getExtraPara4()
+                            adsPrefernce.setAdsDefaultsFB(adsfb.getShowAds(), adsfb.getAdsCount(), adsfb.getShowLoading(), adsfb.getAllowAccess(), adsfb.getAppAdDialogCount(),
+                                    adsfb.getgBanner1(), adsfb.getgBanner2(), adsfb.getgBanner3(),
+                                    adsfb.getgInter1(), adsfb.getgInter2(), adsfb.getgInter3(), adsfb.getgAppopen1(), adsfb.getgAppopen2(), adsfb.getgAppopen3(),
+                                    adsfb.getgNative1(), adsfb.getgNative2(), adsfb.getgNative3(), adsfb.getgRewarded1(), adsfb.getgRewarded2(), adsfb.getgRewarded3(),
+                                    adsfb.getgRewardinter1(), adsfb.getgRewardinter2(), adsfb.getgRewardinter3(), adsfb.getShowGbanner1(), adsfb.getShowGbanner2(),
+                                    adsfb.getShowGbanner3(), adsfb.getShowGInter1(), adsfb.getShowGInter2(), adsfb.getShowGInter3(), adsfb.getShowGappopen1(),
+                                    adsfb.getShowGappopen2(), adsfb.getShowGappopen3(), adsfb.getShowGnative1(), adsfb.getShowGnative2(), adsfb.getShowGnative3(),
+                                    adsfb.getShowGrewarded1(), adsfb.getShowGrewarded2(), adsfb.getShowGrewarded3(), adsfb.getShowGrewardinter1(), adsfb.getShowGrewardinter2(),
+                                    adsfb.getShowGrewardinter3(), adsfb.getExtraPara1(), adsfb.getExtraPara2(), adsfb.getExtraPara3(), adsfb.getExtraPara4()
                             );
                             isLoaded_ADS = true;
 
@@ -1222,6 +1223,8 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
     }
 
     public void loadInterstitial1FB() {
+        Log.e("ndads", String.valueOf(adsPrefernce.showInter1_fb()));
+        Log.e("ndads", adsPrefernce.gInter1_fb());
         if (isConnected(this) && adsPrefernce.showInter1_fb()) {
             if (interstitialAd1 == null) {
                 interstitialAd1 = new com.facebook.ads.InterstitialAd(this, adsPrefernce.gInter1_fb());
@@ -1782,7 +1785,8 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
     }
 
     public void showInterstitial1(Activity context, Callable<Void> params) {
-        if (currentAD % adsPrefernce.adCount() == 0 && isConnected(this) && adsPrefernce.showInter1()) {
+        if (currentAD % adsPrefernce.adCount() == 0 && isConnected(this) && adsPrefernce.showInter1())
+        {
             if (mInterstitialAd1 != null) {
                 if (adsPrefernce.showloading()) {
                     withDelay(context,ConstantAds.AD_DELAY, ConstantAds.AD_MESSAGE, new Callable<Void>() {

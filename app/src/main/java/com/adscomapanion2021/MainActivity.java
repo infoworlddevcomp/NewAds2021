@@ -42,7 +42,7 @@ public class MainActivity extends BaseActivity {
     public void Inter1(View view) {
        // loadAppOpen1();
 
-        showInterstitial1(this, new Callable<Void>() {
+        showInterstitialAd(this, new Callable<Void>() {
             @Override
             public Void call() throws Exception {
                 Toast.makeText(MainActivity.this, "Inter1Dismissed", Toast.LENGTH_SHORT).show();
