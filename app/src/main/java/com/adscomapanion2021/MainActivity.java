@@ -39,9 +39,9 @@ public class MainActivity extends BaseActivity {
 
 
     }
-
     public void Inter1(View view) {
-        loadAppOpen1();
+       // loadAppOpen1();
+
         showInterstitial1(this, new Callable<Void>() {
             @Override
             public Void call() throws Exception {
@@ -76,17 +76,17 @@ public class MainActivity extends BaseActivity {
     }
 
     public void showNative(View view) {
-        showNativeAd1();
+        showNativeAd();
     }
 
     public void AppOpen1(View view) {
-        showAppOpen1(new Callable<Void>() {
-            @Override
-            public Void call() throws Exception {
-                Toast.makeText(MainActivity.this, "AppOpen1 Dismissed", Toast.LENGTH_SHORT).show();
-                return null;
-            }
-        });
+//        showAppOpen1(new Callable<Void>() {
+//            @Override
+//            public Void call() throws Exception {
+//                Toast.makeText(MainActivity.this, "AppOpen1 Dismissed", Toast.LENGTH_SHORT).show();
+//                return null;
+//            }
+//        });
     }
 
     public void showIHBanner(View view) {
@@ -106,17 +106,17 @@ public class MainActivity extends BaseActivity {
     }
 
     public void showIHInter(View view) {
-        showInhouseInterAd(new InhouseInterstitialListener() {
-            @Override
-            public void onAdShown() {
-
-            }
-
-            @Override
-            public void onAdDismissed() {
-                toast("closed");
-            }
-        });
+//        showInhouseInterAd(new InhouseInterstitialListener() {
+//            @Override
+//            public void onAdShown() {
+//
+//            }
+//
+//            @Override
+//            public void onAdDismissed() {
+//                toast("closed");
+//            }
+//        });
     }
 
     public void showIHNative(View view) {
@@ -124,7 +124,6 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onAdLoaded() {
                 findViewById(R.id.native_ad_container).setVisibility(View.VISIBLE);
-
             }
 
             @Override

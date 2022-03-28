@@ -14,6 +14,9 @@ public class AdsDetails {
     @SerializedName("IhAdsDetail")
     @Expose
     private ArrayList<IhAdsDetail> ihAdsDetail = null;
+    @SerializedName("fbadsData")
+    @Expose
+    private ArrayList<AdsDataFB> FBadsData = null;
 
     @SerializedName("success")
     @Expose
@@ -41,6 +44,15 @@ public class AdsDetails {
 
     public void setSuccess(Integer success) {
         this.success = success;
+    }
+
+
+    public ArrayList<AdsDataFB> getFBAdsData() {
+        return FBadsData;
+    }
+
+    public void setFBAdsData(ArrayList<AdsDataFB> FBadsData) {
+        this.FBadsData = FBadsData;
     }
 
 

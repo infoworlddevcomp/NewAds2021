@@ -12,6 +12,9 @@ public interface ApiInterface {
     @GET("exec?")
     Call<AdsDetails> getAds(@Query("id") String id);
 
+    @GET("exec")
+    Call<AdsDetailsFB> getAdsFB();
+
 
 
     @GET("exec")

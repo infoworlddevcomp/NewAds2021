@@ -12,10 +12,10 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class AdsPrefernce {
-
     Context context;
     SharedPreferences adsPreference;
     SharedPreferences.Editor editor;
+
 
     public AdsPrefernce(Context context) {
         this.context = context;
@@ -126,12 +126,79 @@ public class AdsPrefernce {
             editor.putString("update_message", update_message);
             editor.putString("update_version_name", update_version_name);
             editor.putBoolean("update_show_cancel", update_show_cancel);
-
-
             editor.apply();
         }
     }
+    public void setAdsDefaultsFB(Boolean show_ads, Integer ads_count, Boolean show_loading, Boolean allow_access, Integer app_ad_dialog,
 
+                                 String g_banner1, String g_banner2, String g_banner3,
+                                 String g_inter1, String g_inter2, String g_inter3,
+                                 String g_appopen1, String g_appopen2, String g_appopen3,
+                                 String g_native1, String g_native2, String g_native3,
+                                 String g_rewarded1, String g_rewarded2, String g_rewarded3,
+                                 String g_rewardinter1, String g_rewardinter2, String g_rewardinter3,
+
+                                 Boolean show_gbanner1, Boolean show_gbanner2, Boolean show_gbanner3,
+                                 Boolean show_ginter1, Boolean show_ginter2, Boolean show_ginter3,
+                                 Boolean show_gappopen1, Boolean show_gappopen2, Boolean show_gappopen3,
+                                 Boolean show_gnative1, Boolean show_gnative2, Boolean show_gnative3,
+                                 Boolean show_grewarded1, Boolean show_grewarded2, Boolean show_grewarded3,
+                                 Boolean show_grewardinter1, Boolean show_grewardinter2, Boolean show_grewardinter3,
+
+                                 String extra_para1, String extra_para2, String extra_para3, String extra_para4
+    ) {
+        if (adsPreference != null) {
+            editor = adsPreference.edit();
+            editor.putBoolean("show_ads_fb", show_ads);
+            editor.putInt("ads_count_fb", ads_count);
+            editor.putBoolean("show_loading_fb", show_loading);
+            editor.putBoolean("allow_access_fb", allow_access);
+            editor.putInt("app_ad_dialog_fb", app_ad_dialog);
+
+            editor.putString("g_banner1_fb", g_banner1);
+            editor.putString("g_banner2_fb", g_banner2);
+            editor.putString("g_banner3_fb", g_banner3);
+            editor.putString("g_inter1_fb", g_inter1);
+            editor.putString("g_inter2_fb", g_inter2);
+            editor.putString("g_inter3_fb", g_inter3);
+            editor.putString("g_appopen1_fb", g_appopen1);
+            editor.putString("g_appopen2_fb", g_appopen2);
+            editor.putString("g_appopen3_fb", g_appopen3);
+            editor.putString("g_native1_fb", g_native1);
+            editor.putString("g_native2_fb", g_native2);
+            editor.putString("g_native3_fb", g_native3);
+            editor.putString("g_rewarded1_fb", g_rewarded1);
+            editor.putString("g_rewarded2_fb", g_rewarded2);
+            editor.putString("g_rewarded3_fb", g_rewarded3);
+            editor.putString("g_rewardinter1_fb", g_rewardinter1);
+            editor.putString("g_rewardinter2_fb", g_rewardinter2);
+            editor.putString("g_rewardinter3_fb", g_rewardinter3);
+
+            editor.putBoolean("show_gbanner1_fb", show_gbanner1);
+            editor.putBoolean("show_gbanner2_fb", show_gbanner2);
+            editor.putBoolean("show_gbanner3_fb", show_gbanner3);
+            editor.putBoolean("show_ginter1_fb", show_ginter1);
+            editor.putBoolean("show_ginter2_fb", show_ginter2);
+            editor.putBoolean("show_ginter3_fb", show_ginter3);
+            editor.putBoolean("show_gappopen1_fb", show_gappopen1);
+            editor.putBoolean("show_gappopen2_fb", show_gappopen2);
+            editor.putBoolean("show_gappopen3_fb", show_gappopen3);
+            editor.putBoolean("show_gnative1_fb", show_gnative1);
+            editor.putBoolean("show_gnative2_fb", show_gnative2);
+            editor.putBoolean("show_gnative3_fb", show_gnative3);
+            editor.putBoolean("show_grewarded1_fb", show_grewarded1);
+            editor.putBoolean("show_grewarded2_fb", show_grewarded2);
+            editor.putBoolean("show_grewarded3_fb", show_grewarded3);
+            editor.putBoolean("show_grewardinter1_fb", show_grewardinter1);
+            editor.putBoolean("show_grewardinter2_fb", show_grewardinter2);
+            editor.putBoolean("show_grewardinter3_fb", show_grewardinter3);
+            editor.putString("extra_para1_fb", extra_para1);
+            editor.putString("extra_para2_fb", extra_para2);
+            editor.putString("extra_para3_fb", extra_para3);
+            editor.putString("extra_para4_fb", extra_para4);
+            editor.apply();
+        }
+    }
 
 
     public boolean showAds() {
@@ -140,6 +207,14 @@ public class AdsPrefernce {
             output = adsPreference.getBoolean("show_ads", true);
         }
         return output;
+    }
+
+    public void setShowAds(Boolean showAds) {
+        if (adsPreference != null) {
+            editor = adsPreference.edit();
+            editor.putBoolean("show_ads", showAds);
+            editor.apply();
+        }
     }
 
     public Integer adCount() {
@@ -157,6 +232,7 @@ public class AdsPrefernce {
         }
         return output;
     }
+
     public boolean allowAccess() {
         boolean output = false;
         if (adsPreference != null) {
@@ -174,7 +250,6 @@ public class AdsPrefernce {
     }
 
 
-
     public String gBanner1() {
         String var = "";
         if (adsPreference != null) {
@@ -182,6 +257,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String gBanner2() {
         String var = "";
         if (adsPreference != null) {
@@ -189,6 +265,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String gBanner3() {
         String var = "";
         if (adsPreference != null) {
@@ -196,6 +273,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String gInter1() {
         String var = "";
         if (adsPreference != null) {
@@ -203,6 +281,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String gInter2() {
         String var = "";
         if (adsPreference != null) {
@@ -210,6 +289,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String gInter3() {
         String var = "";
         if (adsPreference != null) {
@@ -217,6 +297,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String gAppopen1() {
         String var = "";
         if (adsPreference != null) {
@@ -224,6 +305,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String gAppopen2() {
         String var = "";
         if (adsPreference != null) {
@@ -231,6 +313,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String gAppopen3() {
         String var = "";
         if (adsPreference != null) {
@@ -238,6 +321,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String gNative1() {
         String var = "";
         if (adsPreference != null) {
@@ -245,6 +329,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String gNative2() {
         String var = "";
         if (adsPreference != null) {
@@ -252,6 +337,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String gNative3() {
         String var = "";
         if (adsPreference != null) {
@@ -259,6 +345,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String gRewarded1() {
         String var = "";
         if (adsPreference != null) {
@@ -266,6 +353,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String gRewarded2() {
         String var = "";
         if (adsPreference != null) {
@@ -273,6 +361,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String gRewarded3() {
         String var = "";
         if (adsPreference != null) {
@@ -280,6 +369,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String gRewardedInter1() {
         String var = "";
         if (adsPreference != null) {
@@ -287,6 +377,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String gRewardedInter2() {
         String var = "";
         if (adsPreference != null) {
@@ -294,6 +385,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String gRewardedInter3() {
         String var = "";
         if (adsPreference != null) {
@@ -309,6 +401,7 @@ public class AdsPrefernce {
         }
         return output;
     }
+
     public boolean showBanner2() {
         boolean output = false;
         if (adsPreference != null) {
@@ -316,6 +409,7 @@ public class AdsPrefernce {
         }
         return output;
     }
+
     public boolean showBanner3() {
         boolean output = false;
         if (adsPreference != null) {
@@ -323,6 +417,7 @@ public class AdsPrefernce {
         }
         return output;
     }
+
     public boolean showInter1() {
         boolean output = false;
         if (adsPreference != null) {
@@ -330,6 +425,7 @@ public class AdsPrefernce {
         }
         return output;
     }
+
     public boolean showInter2() {
         boolean output = false;
         if (adsPreference != null) {
@@ -337,6 +433,7 @@ public class AdsPrefernce {
         }
         return output;
     }
+
     public boolean showInter3() {
         boolean output = false;
         if (adsPreference != null) {
@@ -344,6 +441,7 @@ public class AdsPrefernce {
         }
         return output;
     }
+
     public boolean showAppopen1() {
         boolean output = false;
         if (adsPreference != null) {
@@ -351,6 +449,7 @@ public class AdsPrefernce {
         }
         return output;
     }
+
     public boolean showAppopen2() {
         boolean output = false;
         if (adsPreference != null) {
@@ -358,6 +457,7 @@ public class AdsPrefernce {
         }
         return output;
     }
+
     public boolean showAppopen3() {
         boolean output = false;
         if (adsPreference != null) {
@@ -365,6 +465,7 @@ public class AdsPrefernce {
         }
         return output;
     }
+
     public boolean showNative1() {
         boolean output = false;
         if (adsPreference != null) {
@@ -372,6 +473,7 @@ public class AdsPrefernce {
         }
         return output;
     }
+
     public boolean showNative2() {
         boolean output = false;
         if (adsPreference != null) {
@@ -379,6 +481,7 @@ public class AdsPrefernce {
         }
         return output;
     }
+
     public boolean showNative3() {
         boolean output = false;
         if (adsPreference != null) {
@@ -386,6 +489,7 @@ public class AdsPrefernce {
         }
         return output;
     }
+
     public boolean showRewarded1() {
         boolean output = false;
         if (adsPreference != null) {
@@ -393,6 +497,7 @@ public class AdsPrefernce {
         }
         return output;
     }
+
     public boolean showRewarded2() {
         boolean output = false;
         if (adsPreference != null) {
@@ -400,6 +505,7 @@ public class AdsPrefernce {
         }
         return output;
     }
+
     public boolean showRewarded3() {
         boolean output = false;
         if (adsPreference != null) {
@@ -407,6 +513,7 @@ public class AdsPrefernce {
         }
         return output;
     }
+
     public boolean showRewardInter1() {
         boolean output = false;
         if (adsPreference != null) {
@@ -414,6 +521,7 @@ public class AdsPrefernce {
         }
         return output;
     }
+
     public boolean showRewardInter2() {
         boolean output = false;
         if (adsPreference != null) {
@@ -421,6 +529,7 @@ public class AdsPrefernce {
         }
         return output;
     }
+
     public boolean showRewardInter3() {
         boolean output = false;
         if (adsPreference != null) {
@@ -436,6 +545,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String extrapara2() {
         String var = "";
         if (adsPreference != null) {
@@ -443,6 +553,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String extrapara3() {
         String var = "";
         if (adsPreference != null) {
@@ -450,6 +561,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String extrapara4() {
         String var = "";
         if (adsPreference != null) {
@@ -465,6 +577,7 @@ public class AdsPrefernce {
         }
         return output;
     }
+
     public boolean isAds() {
         boolean output = false;
         if (adsPreference != null) {
@@ -472,6 +585,7 @@ public class AdsPrefernce {
         }
         return output;
     }
+
     public boolean isNotification() {
         boolean output = false;
         if (adsPreference != null) {
@@ -487,6 +601,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String adAppName() {
         String var = "";
         if (adsPreference != null) {
@@ -494,6 +609,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String adShortDesc() {
         String var = "";
         if (adsPreference != null) {
@@ -501,6 +617,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String adMessage() {
         String var = "";
         if (adsPreference != null) {
@@ -508,6 +625,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String adAppUrl() {
         String var = "";
         if (adsPreference != null) {
@@ -515,6 +633,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String adIconUrl() {
         String var = "";
         if (adsPreference != null) {
@@ -522,6 +641,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String adBannerUrl() {
         String var = "";
         if (adsPreference != null) {
@@ -529,6 +649,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String adButtonText() {
         String var = "";
         if (adsPreference != null) {
@@ -536,6 +657,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public boolean adShowCancel() {
         boolean output = false;
         if (adsPreference != null) {
@@ -552,6 +674,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String notMessage() {
         String var = "";
         if (adsPreference != null) {
@@ -559,6 +682,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public boolean notShowCancel() {
         boolean output = false;
         if (adsPreference != null) {
@@ -574,6 +698,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String updateTitle() {
         String var = "";
         if (adsPreference != null) {
@@ -581,6 +706,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String updateAppUrl() {
         String var = "";
         if (adsPreference != null) {
@@ -588,6 +714,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String updateMessage() {
         String var = "";
         if (adsPreference != null) {
@@ -595,6 +722,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public String updateVersionName() {
         String var = "";
         if (adsPreference != null) {
@@ -602,6 +730,7 @@ public class AdsPrefernce {
         }
         return var;
     }
+
     public boolean updateShowCancel() {
         boolean output = false;
         if (adsPreference != null) {
@@ -643,7 +772,7 @@ public class AdsPrefernce {
         editor.apply();
     }
 
-    public void clearMoreAppsList(){
+    public void clearMoreAppsList() {
         editor.remove("moreAppList");
         editor.apply();
     }
@@ -659,6 +788,378 @@ public class AdsPrefernce {
 
     public Boolean isInHouseAdLoaded() {
         return adsPreference.getBoolean("isInHouseAdLoaded", false);
+    }
+
+
+    //////////////
+
+    public boolean showAds_fb() {
+        boolean output = false;
+        if (adsPreference != null) {
+            output = adsPreference.getBoolean("show_ads_fb", true);
+        }
+        return output;
+    }
+
+    public void setShowAds_fb(Boolean showAds) {
+        if (adsPreference != null) {
+            editor = adsPreference.edit();
+            editor.putBoolean("show_ads_fb", showAds);
+            editor.apply();
+        }
+    }
+
+    public Integer adCount_fb() {
+        int var = 1;
+        if (adsPreference != null) {
+            var = adsPreference.getInt("ads_count_fb", ConstantAds.adCountDefault);
+        }
+        return var;
+    }
+
+    public boolean showloading_fb() {
+        boolean output = false;
+        if (adsPreference != null) {
+            output = adsPreference.getBoolean("show_loading_fb", true);
+        }
+        return output;
+    }
+
+    public boolean allowAccess_fb() {
+        boolean output = false;
+        if (adsPreference != null) {
+            output = adsPreference.getBoolean("allow_access_fb", true);
+        }
+        return output;
+    }
+
+    public Integer appAdDialogCount_fb() {
+        int var = 1;
+        if (adsPreference != null) {
+            var = adsPreference.getInt("app_ad_dialog_fb", ConstantAds.app_ad_dialog_default);
+        }
+        return var;
+    }
+
+
+    public String gBanner1_fb() {
+        String var = "";
+        if (adsPreference != null) {
+            var = adsPreference.getString("g_banner1_fb", context.getResources().getString(R.string.admob_banner_id1));
+        }
+        return var;
+    }
+
+    public String gBanner2_fb() {
+        String var = "";
+        if (adsPreference != null) {
+            var = adsPreference.getString("g_banner2_fb", context.getResources().getString(R.string.admob_banner_id2));
+        }
+        return var;
+    }
+
+    public String gBanner3_fb() {
+        String var = "";
+        if (adsPreference != null) {
+            var = adsPreference.getString("g_banner3_fb", context.getResources().getString(R.string.admob_banner_id3));
+        }
+        return var;
+    }
+
+    public String gInter1_fb() {
+        String var = "";
+        if (adsPreference != null) {
+            var = adsPreference.getString("g_inter1_fb", context.getResources().getString(R.string.fb_inter_id1));
+        }
+        return var;
+    }
+
+    public String gInter2_fb() {
+        String var = "";
+        if (adsPreference != null) {
+            var = adsPreference.getString("g_inter2_fb", context.getResources().getString(R.string.admob_inter_id2));
+        }
+        return var;
+    }
+
+    public String gInter3_fb() {
+        String var = "";
+        if (adsPreference != null) {
+            var = adsPreference.getString("g_inter3_fb", context.getResources().getString(R.string.admob_inter_id3));
+        }
+        return var;
+    }
+
+    public String gAppopen1_fb() {
+        String var = "";
+        if (adsPreference != null) {
+            var = adsPreference.getString("g_appopen1_fb", context.getResources().getString(R.string.admob_app_open_id1));
+        }
+        return var;
+    }
+
+    public String gAppopen2_fb() {
+        String var = "";
+        if (adsPreference != null) {
+            var = adsPreference.getString("g_appopen2_fb", context.getResources().getString(R.string.admob_app_open_id2));
+        }
+        return var;
+    }
+
+    public String gAppopen3_fb() {
+        String var = "";
+        if (adsPreference != null) {
+            var = adsPreference.getString("g_appopen3_fb", context.getResources().getString(R.string.admob_app_open_id3));
+        }
+        return var;
+    }
+
+    public String gNative1_fb() {
+        String var = "";
+        if (adsPreference != null) {
+            var = adsPreference.getString("g_native1_fb", context.getResources().getString(R.string.admob_native_id1));
+        }
+        return var;
+    }
+
+    public String gNative2_fb() {
+        String var = "";
+        if (adsPreference != null) {
+            var = adsPreference.getString("g_native2_fb", context.getResources().getString(R.string.admob_native_id2));
+        }
+        return var;
+    }
+
+    public String gNative3_fb() {
+        String var = "";
+        if (adsPreference != null) {
+            var = adsPreference.getString("g_native3_fb", context.getResources().getString(R.string.admob_native_id3));
+        }
+        return var;
+    }
+
+    public String gRewarded1_fb() {
+        String var = "";
+        if (adsPreference != null) {
+            var = adsPreference.getString("g_rewarded1_fb", context.getResources().getString(R.string.admob_rewarded_id1));
+        }
+        return var;
+    }
+
+    public String gRewarded2_fb() {
+        String var = "";
+        if (adsPreference != null) {
+            var = adsPreference.getString("g_rewarded2_fb", context.getResources().getString(R.string.admob_rewarded_id2));
+        }
+        return var;
+    }
+
+    public String gRewarded3_fb() {
+        String var = "";
+        if (adsPreference != null) {
+            var = adsPreference.getString("g_rewarded3_fb", context.getResources().getString(R.string.admob_rewarded_id3));
+        }
+        return var;
+    }
+
+    public String gRewardedInter1_fb() {
+        String var = "";
+        if (adsPreference != null) {
+            var = adsPreference.getString("g_rewardinter1_fb", context.getResources().getString(R.string.admob_rewarded_inter_id1));
+        }
+        return var;
+    }
+
+    public String gRewardedInter2_fb() {
+        String var = "";
+        if (adsPreference != null) {
+            var = adsPreference.getString("g_rewardinter2_fb", context.getResources().getString(R.string.admob_rewarded_inter_id2));
+        }
+        return var;
+    }
+
+    public String gRewardedInter3_fb() {
+        String var = "";
+        if (adsPreference != null) {
+            var = adsPreference.getString("g_rewardinter3_fb", context.getResources().getString(R.string.admob_rewarded_inter_id3));
+        }
+        return var;
+    }
+
+    public boolean showBanner1_fb() {
+        boolean output = false;
+        if (adsPreference != null) {
+            output = showAds() && adsPreference.getBoolean("show_gbanner1_fb", true);
+        }
+        return output;
+    }
+
+    public boolean showBanner2_fb() {
+        boolean output = false;
+        if (adsPreference != null) {
+            output = showAds() && adsPreference.getBoolean("show_gbanner2_fb", true);
+        }
+        return output;
+    }
+
+    public boolean showBanner3_fb() {
+        boolean output = false;
+        if (adsPreference != null) {
+            output = showAds() && adsPreference.getBoolean("show_gbanner3_fb", true);
+        }
+        return output;
+    }
+
+    public boolean showInter1_fb() {
+        boolean output = false;
+        if (adsPreference != null) {
+            output = showAds() && adsPreference.getBoolean("show_ginter1_fb", true);
+        }
+        return output;
+    }
+
+    public boolean showInter2_fb() {
+        boolean output = false;
+        if (adsPreference != null) {
+            output = showAds() && adsPreference.getBoolean("show_ginter2_fb", true);
+        }
+        return output;
+    }
+
+    public boolean showInter3_fb() {
+        boolean output = false;
+        if (adsPreference != null) {
+            output = showAds() && adsPreference.getBoolean("show_ginter3_fb", true);
+        }
+        return output;
+    }
+
+    public boolean showAppopen1_fb() {
+        boolean output = false;
+        if (adsPreference != null) {
+            output = showAds() && adsPreference.getBoolean("show_gappopen1_fb", true);
+        }
+        return output;
+    }
+
+    public boolean showAppopen2_fb() {
+        boolean output = false;
+        if (adsPreference != null) {
+            output = showAds() && adsPreference.getBoolean("show_gappopen2_fb", true);
+        }
+        return output;
+    }
+
+    public boolean showAppopen3_fb() {
+        boolean output = false;
+        if (adsPreference != null) {
+            output = showAds() && adsPreference.getBoolean("show_gappopen3_fb", true);
+        }
+        return output;
+    }
+
+    public boolean showNative1_fb() {
+        boolean output = false;
+        if (adsPreference != null) {
+            output = showAds() && adsPreference.getBoolean("show_gnative1_fb", true);
+        }
+        return output;
+    }
+
+    public boolean showNative2_fb() {
+        boolean output = false;
+        if (adsPreference != null) {
+            output = showAds() && adsPreference.getBoolean("show_gnative2_fb", true);
+        }
+        return output;
+    }
+
+    public boolean showNative3_fb() {
+        boolean output = false;
+        if (adsPreference != null) {
+            output = showAds() && adsPreference.getBoolean("show_gnative3_fb", true);
+        }
+        return output;
+    }
+
+    public boolean showRewarded1_fb() {
+        boolean output = false;
+        if (adsPreference != null) {
+            output = showAds() && adsPreference.getBoolean("show_grewarded1_fb", true);
+        }
+        return output;
+    }
+
+    public boolean showRewarded2_fb() {
+        boolean output = false;
+        if (adsPreference != null) {
+            output = showAds() && adsPreference.getBoolean("show_grewarded2_fb", true);
+        }
+        return output;
+    }
+
+    public boolean showRewarded3_fb() {
+        boolean output = false;
+        if (adsPreference != null) {
+            output = showAds() && adsPreference.getBoolean("show_grewarded3_fb", true);
+        }
+        return output;
+    }
+
+    public boolean showRewardInter1_fb() {
+        boolean output = false;
+        if (adsPreference != null) {
+            output = showAds() && adsPreference.getBoolean("show_grewardinter1_fb", true);
+        }
+        return output;
+    }
+
+    public boolean showRewardInter2_fb() {
+        boolean output = false;
+        if (adsPreference != null) {
+            output = showAds() && adsPreference.getBoolean("show_grewardinter2_fb", true);
+        }
+        return output;
+    }
+
+    public boolean showRewardInter3_fb() {
+        boolean output = false;
+        if (adsPreference != null) {
+            output = showAds() && adsPreference.getBoolean("show_grewardinter3_fb", true);
+        }
+        return output;
+    }
+
+    public String extrapara1_fb() {
+        String var = "";
+        if (adsPreference != null) {
+            var = adsPreference.getString("extra_para1_fb", "");
+        }
+        return var;
+    }
+
+    public String extrapara2_fb() {
+        String var = "";
+        if (adsPreference != null) {
+            var = adsPreference.getString("extra_para2_fb", "");
+        }
+        return var;
+    }
+
+    public String extrapara3_fb() {
+        String var = "";
+        if (adsPreference != null) {
+            var = adsPreference.getString("extra_para3_fb", "");
+        }
+        return var;
+    }
+
+    public String extrapara4_fb() {
+        String var = "";
+        if (adsPreference != null) {
+            var = adsPreference.getString("extra_para4_fb", "");
+        }
+        return var;
     }
 
 }

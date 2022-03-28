@@ -33,12 +33,14 @@ import com.google.android.gms.ads.nativead.MediaView;
 import com.google.android.gms.ads.nativead.NativeAd;
 import com.google.android.gms.ads.nativead.NativeAdView;
 import com.newAds2021.R;
+import com.newAds2021.adsmodels.AdsPrefernce;
+
+import static com.newAds2021.adsmodels.ConstantAds.ad_bg_drawable;
 
 /**
  * Base class for a template view. *
  */
 public class TemplateView extends FrameLayout {
-
   private int templateType;
   private NativeTemplateStyle styles;
   private NativeAd nativeAd;
@@ -118,6 +120,14 @@ public class TemplateView extends FrameLayout {
     Typeface ctaTypeface = styles.getCallToActionTextTypeface();
     if (ctaTypeface != null && callToActionView != null) {
       callToActionView.setTypeface(ctaTypeface);
+//      try {
+//        if (ConstantAds.ad_bg_drawable != 0) {
+////          callToActionView.setBackgroundResource(ConstantAds.ad_bg_drawable);
+//          callToActionView.setBackgroundColor(getResources().getColor(R.color.black));
+//        }
+//      } catch (Exception e) {
+//        e.printStackTrace();
+//      }
     }
 
     int primaryTypefaceColor = styles.getPrimaryTextTypefaceColor();
@@ -133,6 +143,7 @@ public class TemplateView extends FrameLayout {
     int tertiaryTypefaceColor = styles.getTertiaryTextTypefaceColor();
     if (tertiaryTypefaceColor > 0 && tertiaryView != null) {
       tertiaryView.setTextColor(tertiaryTypefaceColor);
+//      tertiaryView.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
     }
 
     int ctaTypefaceColor = styles.getCallToActionTypefaceColor();
@@ -242,11 +253,23 @@ public class TemplateView extends FrameLayout {
 
     if (tertiaryView != null) {
       tertiaryView.setText(body);
+//      tertiaryView.setTextColor(getResources().getColor(android.R.color.darker_gray));
       nativeAdView.setBodyView(tertiaryView);
     }
 
     nativeAdView.setNativeAd(nativeAd);
+
+    try {
+
+      if (ad_bg_drawable != 0 && new AdsPrefernce(getContext()).showRewardInter1()) {
+        callToActionView.setBackgroundResource(ad_bg_drawable);
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
   }
+
   public void destroyNativeAd() {
     nativeAd.destroy();
   }
@@ -263,17 +286,17 @@ public class TemplateView extends FrameLayout {
   private void initView(Context context, AttributeSet attributeSet) {
 
     TypedArray attributes =
-        context.getTheme().obtainStyledAttributes(attributeSet, R.styleable.TemplateView, 0, 0);
+            context.getTheme().obtainStyledAttributes(attributeSet, R.styleable.TemplateView, 0, 0);
 
     try {
       templateType =
-          attributes.getResourceId(
-              R.styleable.TemplateView_gnt_template_type, R.layout.gnt_medium_template_view);
+              attributes.getResourceId(
+                      R.styleable.TemplateView_gnt_template_type, R.layout.gnt_medium_template_view);
     } finally {
       attributes.recycle();
     }
     LayoutInflater inflater =
-        (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     inflater.inflate(templateType, this);
   }
 

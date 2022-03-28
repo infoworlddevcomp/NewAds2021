@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:id="@+id/_lay_native2"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <com.newAds2021.nativeadtemplate.TemplateView
@@ -13,7 +14,7 @@
     <androidx.cardview.widget.CardView
         android:layout_gravity="center"
         android:visibility="gone"
-        android:id="@+id/native_ad_container"
+        android:id="@+id/native_ad_container2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
