@@ -6586,7 +6586,7 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
             public Void call() throws Exception {
                 if (!isLoaded_ADS) {
                     getAdsx();
-                    getAdsFB();
+
                 }
 
                 return null;
