@@ -340,60 +340,6 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
         });
     }
 
-    public void getAdsFB() {
-        FBAPI.apiInterface().getAdsFB().enqueue(new retrofit2.Callback<AdsDetailsFB>() {
-            @Override
-            public void onResponse(@NonNull Call<AdsDetailsFB> call, @NonNull Response<AdsDetailsFB> response) {
-                AdsDetailsFB adsDetails = response.body();
-                adsDetailsArrayListFB = new ArrayList<>();
-                try {
-                    if (adsDetails.getAdsData() != null) {
-                        adsDetailsArrayListFB = adsDetails.getAdsData();
-                        AdsDataFB ads = adsDetailsArrayListFB.get(0);
-                        adsPrefernce = new AdsPrefernce(BaseAdsClass.this);
-                        if (adsDetailsArrayListFB != null && adsDetailsArrayListFB.size() > 0) {
-                            adsPrefernce.setAdsDefaultsFB(ads.getShowAds(), ads.getAdsCount(), ads.getShowLoading(), ads.getAllowAccess(), ads.getAppAdDialogCount(),
-                                    ads.getgBanner1(), ads.getgBanner2(), ads.getgBanner3(),
-                                    ads.getgInter1(), ads.getgInter2(), ads.getgInter3(), ads.getgAppopen1(), ads.getgAppopen2(), ads.getgAppopen3(),
-                                    ads.getgNative1(), ads.getgNative2(), ads.getgNative3(), ads.getgRewarded1(), ads.getgRewarded2(), ads.getgRewarded3(),
-                                    ads.getgRewardinter1(), ads.getgRewardinter2(), ads.getgRewardinter3(), ads.getShowGbanner1(), ads.getShowGbanner2(),
-                                    ads.getShowGbanner3(), ads.getShowGInter1(), ads.getShowGInter2(), ads.getShowGInter3(), ads.getShowGappopen1(),
-                                    ads.getShowGappopen2(), ads.getShowGappopen3(), ads.getShowGnative1(), ads.getShowGnative2(), ads.getShowGnative3(),
-                                    ads.getShowGrewarded1(), ads.getShowGrewarded2(), ads.getShowGrewarded3(), ads.getShowGrewardinter1(), ads.getShowGrewardinter2(),
-                                    ads.getShowGrewardinter3(), ads.getExtraPara1(), ads.getExtraPara2(), ads.getExtraPara3(), ads.getExtraPara4()
-                            );
-                            isLoaded_ADS = true;
-
-                            currentAD = adsPrefernce.adCount();
-
-                            if (ConstantAds.PRELOAD_INTERSTITIAL) {
-                                loadInterstitialAds(BaseAdsClass.this);
-                                loadInterstitialAdsFB(BaseAdsClass.this);
-                            }
-                            if (!adsPrefernce.showRewardInter3()) {
-                                loadNativeAdBeta();
-                            }
-                            if (ConstantAds.PRELOAD_REWARD) {
-                                loadRewardedAds();
-                            }
-                            if (ConstantAds.PRELOAD_APPOPEN) {
-                                loadAppOpenAds(BaseAdsClass.this);
-                            }
-
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<AdsDetailsFB> call, @NonNull Throwable t) {
-
-            }
-        });
-    }
 
     boolean verifyInstallerId(Context context) {
         List<String> validInstallers = new ArrayList<>(Arrays.asList("com.android.vending", "com.google.android.feedback"));
