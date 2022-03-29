@@ -27,4 +27,27 @@
     <string name="privacy_inhouse">This Ad is servered by Developer of this app, We do not take any personal or identificable information of our user while showing this ad. Our User\'s Privacy is our topmost priority.\n
     \nYou can check Application\'s Privacy Policy for more Information.\n\nNote: Google, Google Play Store and Play Store Logo is trademark of Google Inc.</string>
 
+    <string name="app_terms_policies"><![CDATA[App Terms & Policies]]></string>
+    <string name="show_movies">1</string>
+    <string name="Qureka_Url">https://406.game.qureka.com/</string>
+
+    <string name="AppPassword">INDIA</string>
+
+    <string name="showWatchCricket">1</string>
+
+    <string name="showChannel">1</string>
+
+    <string name="my_preference">fristtime</string>
+
+    <string name="my_preference_key">abc</string>
+
+    <string name="telegram_Channel_link">https://t.me/ztvsports</string>
+
+    <string name="Privecy_policy_url">https://freepikashow.blogspot.com/p/free-pikashow.html</string>
+
+    <string name="Channel_Blog_URl">https://tvchannelurl.blogspot.com/p/tvchannelurl.html</string>
+
+    <string name="Get_Password_Url">https://tvchannelurl.blogspot.com/p/application-password.html</string>
+
+
 </resources>

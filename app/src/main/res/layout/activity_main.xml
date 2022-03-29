@@ -62,5 +62,25 @@
         layout="@layout/native_ad_layout_small"/>
 
 
+    <Button
+        android:onClick="QurekaOnClick"
+        android:text="QurekaOnClick"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:onClick="MGLOnClick"
+        android:text=" MGLOnClick"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:onClick="PredChampOnClick"
+        android:text="PredChampOnClick"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+
 
 </LinearLayout>

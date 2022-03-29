@@ -6,11 +6,14 @@ import static com.newAds2021.adsmodels.ConstantAds.showProgress;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -21,9 +24,11 @@ import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -34,8 +39,18 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.cardview.widget.CardView;
 
+import com.applovin.mediation.MaxAd;
+import com.applovin.mediation.MaxAdListener;
+import com.applovin.mediation.MaxAdViewAdListener;
+import com.applovin.mediation.MaxError;
+import com.applovin.mediation.ads.MaxAdView;
+import com.applovin.mediation.ads.MaxInterstitialAd;
+import com.applovin.mediation.nativeAds.MaxNativeAdListener;
+import com.applovin.mediation.nativeAds.MaxNativeAdLoader;
+import com.applovin.mediation.nativeAds.MaxNativeAdView;
 import com.bumptech.glide.Glide;
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdOptionsView;
@@ -75,6 +90,8 @@ import com.newAds2021.adsmodels.AdsDetails;
 import com.newAds2021.adsmodels.AdsDetailsFB;
 import com.newAds2021.adsmodels.AdsPrefernce;
 import com.newAds2021.adsmodels.AdsData;
+import com.newAds2021.adsmodels.AppDataModel;
+import com.newAds2021.adsmodels.AppPrefernce;
 import com.newAds2021.adsmodels.AppsDetails;
 import com.newAds2021.adsmodels.FBAPI;
 import com.newAds2021.adsmodels.IhAdsDetail;
@@ -86,8 +103,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 
 //"AKfycbwWa0oIwNsZ4b7b-aIGi61iyJ98XFCy2kbfXNC-ZhiIkHtlHu2R88r-gzHc7eigJykh7A/exec"
@@ -127,14 +146,41 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
     public static com.facebook.ads.InterstitialAd interstitialAd1, interstitialAd2, interstitialAd3 = null;
     public static AppOpenAd appOpenAd1, appOpenAd2, appOpenAd3 = null;
 
+
+    public Boolean showMAXBanner;
+    public Boolean showMAXInterstitial;
+    public Boolean showMAXInterstitial2;
+    public Boolean showMAXNative;
+    public Boolean showMAXSmallNative;
+    public String MAXBanner_ID = "";
+    public String MAXInterstitial_ID = "";
+    public String MAXNative_ID = "";
+    public String MAXSmallNative_ID = "";
+    int retryAttempt;
+
+    MaxInterstitialAd interstitialAd;
+    private MaxNativeAdLoader nativeAdLoader;
+    private MaxAd nativeAd;
+
     AdRequest adRequest = new AdRequest.Builder().build();
     AdsPrefernce adsPrefernce;
+    public AppPrefernce appPrefernce;
+    Boolean AutoQurekaAds = false;
+
+    String Url;
+
+
+    ArrayList<AppDataModel> AppDataList;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         adsPrefernce = new AdsPrefernce(this);
+        appPrefernce = new AppPrefernce(this);
+
+
         networkStateReceiver = new NetworkStateReceiver();
         networkStateReceiver.addListener(this);
         this.serviceDialog = new Dialog(this);
@@ -148,6 +194,7 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
             public Void call() throws Exception {
                 if (!isLoaded_ADS) {
                     getAdsx();
+                    getAppData();
                 }
 
                 return null;
@@ -340,6 +387,72 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
             }
         });
     }
+
+    // API.apiInterface().getAds(ConstantAds.adUrlId).enqueue(new retrofit2.Callback<AdsDetails>() {
+//     API.apiInterface().getAds(ConstantAds.adUrlId).enqueue(new retrofit2.Callback<AdsDetails>() {
+//        @Override
+//        public void onResponse(@NonNull Call<AdsDetails> call, @NonNull Response<AdsDetails> response) {
+//            AdsDetails adsDetails = response.body();
+
+
+    public void getAppData() {
+         API.apiInterface().getAppData(ConstantAds.adUrlId,"AppData").enqueue(new retrofit2.Callback<AppsDetails>() {
+            @Override
+            public void onResponse(@NonNull Call<AppsDetails> call, @NonNull Response<AppsDetails> response) {
+                AppDataList = new ArrayList<>();
+                try {
+                    AppsDetails appsDetails = response.body();
+
+
+                    if (appsDetails != null) {
+
+                        AppDataModel app = AppDataList.get(0);
+                        if (AppDataList != null && AppDataList.size() > 0) {
+                            appPrefernce.setAppDefaults(
+                                    app.getShowMovies(), app.isShowTelegramBlog(),
+                                    app.getShowWatchCricket(), app.getShowChannel(),
+                                    app.isShowFirstActivity(), app.isShowTwoActivity(),
+                                    app.isShowThreeActivity(), app.isShowFourActivity(),
+                                    app.getCreateChannel(), app.getLiveScore(), app.isIplCricket(),
+                                    app.isShowGetPassword(), app.getAppPassword(), app.getShowBlogMovies(), app.getShowMYMovies(),
+                                    app.getQurekaUrl1(), app.getQurekaUrl2(), app.getQurekaUrl3(),
+                                    app.isShowMaxBanner(), app.isShowMaxInter(), app.getMaxBannerId(), app.getMaxInterId(),
+                                    app.isShowMaxNative(), app.getMaxNativeId(), app.isShowMaxSmallNative(), app.getMaxSmallNativeId());
+
+                            showMAXBanner = appPrefernce.showMaxBanner();
+                            showMAXInterstitial = appPrefernce.showMaxInter();
+                            showMAXInterstitial2 = adsPrefernce.showRewardInter3();
+                            showMAXNative = appPrefernce.showMaxNative();
+                            showMAXSmallNative = appPrefernce.showMaxSmallNative();
+                            MAXBanner_ID = appPrefernce.maxBannerId();
+                            MAXInterstitial_ID = appPrefernce.maxInterId();
+                            MAXNative_ID = appPrefernce.maxNativeId();
+                            MAXSmallNative_ID = appPrefernce.maxSmallNativeId();
+                            AutoQurekaAds = Boolean.getBoolean(appPrefernce.showMovies());
+
+                        }
+
+                    }
+
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.e("catch", e.getLocalizedMessage());
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<AppsDetails> call, @NonNull Throwable t) {
+
+            }
+        });
+
+    }
+
+
+
 
 
     boolean verifyInstallerId(Context context) {
@@ -6590,6 +6703,7 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
             public Void call() throws Exception {
                 if (!isLoaded_ADS) {
                     getAdsx();
+                    getAppData();
 
                 }
 
@@ -6603,4 +6717,407 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
     public void networkUnavailable() {
 
     }
+
+    // app required param
+
+     public void showMAXBanner() {
+        if (showMAXBanner) {
+            LinearLayout adContainer = (LinearLayout) this.findViewById(R.id.banner_adView);
+            adContainer.setVisibility(View.GONE);
+            MaxAdView adView = new MaxAdView(MAXBanner_ID, this);
+            int width = ViewGroup.LayoutParams.MATCH_PARENT;
+            int heightPx = getResources().getDimensionPixelSize(R.dimen.banner_height);
+            adView.setLayoutParams(new FrameLayout.LayoutParams(width, heightPx));
+            adView.setListener(new MaxAdViewAdListener() {
+                @Override
+                public void onAdExpanded(MaxAd ad) {
+
+                }
+
+                @Override
+                public void onAdCollapsed(MaxAd ad) {
+
+                }
+
+                @Override
+                public void onAdLoaded(MaxAd maxAd) {
+                    adView.setVisibility(View.VISIBLE);
+                    adContainer.setVisibility(View.VISIBLE);
+                    adView.startAutoRefresh();
+                }
+
+                @Override
+                public void onAdDisplayed(MaxAd ad) {
+
+                }
+
+                @Override
+                public void onAdHidden(MaxAd ad) {
+
+                }
+
+                @Override
+                public void onAdClicked(MaxAd ad) {
+
+                }
+
+                @Override
+                public void onAdLoadFailed(String adUnitId, MaxError error) {
+                    adView.destroy();
+                    adView.setVisibility(View.GONE);
+                    adContainer.setVisibility(View.GONE);
+                    adView.stopAutoRefresh();
+                }
+
+                @Override
+                public void onAdDisplayFailed(MaxAd ad, MaxError error) {
+
+                }
+            });
+            adContainer.removeAllViews();
+            adContainer.addView(adView);
+            adView.loadAd();
+        }
+
+
+    }
+
+    public void showMAXNativeAd() {
+        if (showMAXNative) {
+            FrameLayout nativeAdContainer = findViewById(R.id.MAX_native_ad_layout);
+
+
+            nativeAdContainer.setBackgroundColor(getResources().getColor(R.color.white));
+            nativeAdContainer.setVisibility(View.VISIBLE);
+            nativeAdLoader = new MaxNativeAdLoader(MAXNative_ID, this);
+            nativeAdLoader.setNativeAdListener(new MaxNativeAdListener() {
+                @Override
+                public void onNativeAdLoaded(final MaxNativeAdView nativeAdView, final MaxAd ad) {
+                    // Clean up any pre-existing native ad to prevent memory leaks.
+                    if (nativeAd != null) {
+                        nativeAdLoader.destroy(nativeAd);
+                    }
+
+                    // Save ad for cleanup.
+                    nativeAd = ad;
+
+                    // Add ad view to view.
+                    nativeAdContainer.removeAllViews();
+                    nativeAdContainer.addView(nativeAdView);
+                }
+
+                @Override
+                public void onNativeAdLoadFailed(final String adUnitId, final MaxError error) {
+                    // We recommend retrying with exponentially higher delays up to a maximum delay
+                }
+
+                @Override
+                public void onNativeAdClicked(final MaxAd ad) {
+                    // Optional click callback
+                }
+            });
+
+            nativeAdLoader.loadAd();
+        }
+
+    }
+
+    public void showMAXSmallNativeAd() {
+        if (showMAXSmallNative) {
+            FrameLayout nativeAdContainer = findViewById(R.id.MAX_native_small_ad_layout);
+            nativeAdContainer.setBackgroundColor(getResources().getColor(R.color.white));
+            nativeAdContainer.setVisibility(View.VISIBLE);
+            nativeAdLoader = new MaxNativeAdLoader(MAXSmallNative_ID, this);
+            nativeAdLoader.setNativeAdListener(new MaxNativeAdListener() {
+                @Override
+                public void onNativeAdLoaded(final MaxNativeAdView nativeAdView, final MaxAd ad) {
+                    // Clean up any pre-existing native ad to prevent memory leaks.
+                    if (nativeAd != null) {
+                        nativeAdLoader.destroy(nativeAd);
+                    }
+
+                    // Save ad for cleanup.
+                    nativeAd = ad;
+
+                    // Add ad view to view.
+                    nativeAdContainer.removeAllViews();
+                    nativeAdContainer.addView(nativeAdView);
+                }
+
+                @Override
+                public void onNativeAdLoadFailed(final String adUnitId, final MaxError error) {
+                    // We recommend retrying with exponentially higher delays up to a maximum delay
+                }
+
+                @Override
+                public void onNativeAdClicked(final MaxAd ad) {
+                    // Optional click callback
+                }
+            });
+
+            nativeAdLoader.loadAd();
+        }
+
+    }
+
+    public void loadMAXInterstitial() {
+        if (showMAXInterstitial) {
+            interstitialAd = new MaxInterstitialAd(MAXInterstitial_ID, this);
+            interstitialAd.setListener(new MaxAdListener() {
+                @Override
+                public void onAdLoaded(MaxAd ad) {
+                    retryAttempt = 0;
+                }
+
+                @Override
+                public void onAdDisplayed(MaxAd ad) {
+
+                }
+
+                @Override
+                public void onAdHidden(MaxAd ad) {
+                    interstitialAd.loadAd();
+                }
+
+                @Override
+                public void onAdClicked(MaxAd ad) {
+
+                }
+
+                @Override
+                public void onAdLoadFailed(String adUnitId, MaxError error) {
+                    retryAttempt++;
+                    long delayMillis = TimeUnit.SECONDS.toMillis((long) Math.pow(2, Math.min(6, retryAttempt)));
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            interstitialAd.loadAd();
+                        }
+                    }, delayMillis);
+                }
+
+                @Override
+                public void onAdDisplayFailed(MaxAd ad, MaxError error) {
+                    interstitialAd.loadAd();
+                }
+            });
+            interstitialAd.loadAd();
+        }
+    }
+
+    public void loadMAXInterstitial2() {
+        if (showMAXInterstitial2) {
+            interstitialAd = new MaxInterstitialAd(MAXInterstitial_ID, this);
+            interstitialAd.setListener(new MaxAdListener() {
+                @Override
+                public void onAdLoaded(MaxAd ad) {
+                    retryAttempt = 0;
+                }
+
+                @Override
+                public void onAdDisplayed(MaxAd ad) {
+
+                }
+
+                @Override
+                public void onAdHidden(MaxAd ad) {
+                    interstitialAd.loadAd();
+                }
+
+                @Override
+                public void onAdClicked(MaxAd ad) {
+
+                }
+
+                @Override
+                public void onAdLoadFailed(String adUnitId, MaxError error) {
+                    retryAttempt++;
+                    long delayMillis = TimeUnit.SECONDS.toMillis((long) Math.pow(2, Math.min(6, retryAttempt)));
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            interstitialAd.loadAd();
+                        }
+                    }, delayMillis);
+                }
+
+                @Override
+                public void onAdDisplayFailed(MaxAd ad, MaxError error) {
+                    interstitialAd.loadAd();
+                }
+            });
+            interstitialAd.loadAd();
+        }
+    }
+
+    public void showMAXInterstitial(Callable<Void> callable) {
+        if (showMAXInterstitial) {
+            if (interstitialAd.isReady()) {
+                try {
+                    interstitialAd.showAd();
+                    try {
+                        callable.call();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                try {
+                    callable.call();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            try {
+                callable.call();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+
+    }
+
+    public void showMAXInterstitial2(Callable<Void> callable) {
+        if (showMAXInterstitial2) {
+            if (interstitialAd.isReady()) {
+                try {
+                    interstitialAd.showAd();
+                    try {
+                        callable.call();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                try {
+                    callable.call();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            try {
+                callable.call();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+
+    }
+
+    public void ShowQurekaInterstationAds(Context context, int Type) {
+        if (AutoQurekaAds) {
+
+            Drawable BgImage = null;
+            if (Type == 1) {
+                Url = appPrefernce.QurekaUrl1();
+                BgImage = getDrawable(R.drawable.qurekaposter);
+            }
+            if (Type == 2) {
+                Url = appPrefernce.QurekaUrl2();
+                BgImage = getDrawable(R.drawable.predictionposter);
+            }
+            if (Type == 3) {
+                Url = appPrefernce.QurekaUrl3();
+                BgImage = getDrawable(R.drawable.mglposter);
+            }
+            final Handler handler = new Handler();
+            Drawable finalBgImage = BgImage;
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Dialog dialog = new Dialog(context);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+                    dialog.setContentView(R.layout.qureka_ads_inter);
+                    dialog.setCancelable(false);
+
+                    ((LinearLayout) dialog.findViewById(R.id.ll_img)).setBackground(finalBgImage);
+
+                    ((LinearLayout) dialog.findViewById(R.id.ll_close)).setOnClickListener(new View.OnClickListener() {
+                        public void onClick(View view) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    ((LinearLayout) dialog.findViewById(R.id.ll_img)).setOnClickListener(new View.OnClickListener() {
+                        public void onClick(View view) {
+                            try {
+                                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                                CustomTabsIntent customTabsIntent = builder.build();
+                                customTabsIntent.intent.setPackage("com.android.chrome");
+                                customTabsIntent.launchUrl(context, Uri.parse(Url));
+                            } catch (ActivityNotFoundException ex) {
+                                // Chrome browser presumably not installed and open Kindle Browser
+                                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                                CustomTabsIntent customTabsIntent = builder.build();
+                                customTabsIntent.launchUrl(context, Uri.parse(Url));
+                            }
+                            dialog.dismiss();
+                        }
+                    });
+
+                    dialog.show();
+                }
+            }, 500);
+
+        }
+
+
+    }
+
+    public void QurekaOnClick(View view) {
+
+        try {
+            CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+            CustomTabsIntent customTabsIntent = builder.build();
+            customTabsIntent.intent.setPackage("com.android.chrome");
+            customTabsIntent.launchUrl(this, Uri.parse(appPrefernce.QurekaUrl1()));
+        } catch (ActivityNotFoundException ex) {
+            // Chrome browser presumably not installed and open Kindle Browser
+            CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+            CustomTabsIntent customTabsIntent = builder.build();
+            customTabsIntent.launchUrl(this, Uri.parse(appPrefernce.QurekaUrl1()));
+        }
+    }
+
+    public void PredChampOnClick(View view) {
+        try {
+            CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+            CustomTabsIntent customTabsIntent = builder.build();
+            customTabsIntent.intent.setPackage("com.android.chrome");
+            customTabsIntent.launchUrl(this, Uri.parse(appPrefernce.QurekaUrl2()));
+        } catch (ActivityNotFoundException ex) {
+            // Chrome browser presumably not installed and open Kindle Browser
+            CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+            CustomTabsIntent customTabsIntent = builder.build();
+            customTabsIntent.launchUrl(this, Uri.parse(appPrefernce.QurekaUrl2()));
+        }
+    }
+
+    public void MGLOnClick(View view) {
+        try {
+            CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+            CustomTabsIntent customTabsIntent = builder.build();
+            customTabsIntent.intent.setPackage("com.android.chrome");
+            customTabsIntent.launchUrl(this, Uri.parse(appPrefernce.QurekaUrl3()));
+        } catch (ActivityNotFoundException ex) {
+            // Chrome browser presumably not installed and open Kindle Browser
+            CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+            CustomTabsIntent customTabsIntent = builder.build();
+            customTabsIntent.launchUrl(this, Uri.parse(appPrefernce.QurekaUrl3()));
+        }
+    }
+
+
+
+
 }

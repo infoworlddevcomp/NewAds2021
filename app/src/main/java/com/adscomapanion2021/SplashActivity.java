@@ -41,7 +41,7 @@ public class SplashActivity extends BaseActivity {
 //                return null;
 //            }
 //        });
-//    }
+ //   }
 //
 //    @Override
 //    public void onBackPressed() {
