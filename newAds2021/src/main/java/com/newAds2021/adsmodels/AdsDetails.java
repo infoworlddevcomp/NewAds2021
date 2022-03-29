@@ -56,12 +56,4 @@ public class AdsDetails {
     }
 
 
-
-
-
-
-
-
-
-
 }

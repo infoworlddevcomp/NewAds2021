@@ -90,12 +90,14 @@ import com.newAds2021.adsmodels.AdsDetails;
 import com.newAds2021.adsmodels.AdsDetailsFB;
 import com.newAds2021.adsmodels.AdsPrefernce;
 import com.newAds2021.adsmodels.AdsData;
+import com.newAds2021.adsmodels.AppDataAPI;
 import com.newAds2021.adsmodels.AppDataModel;
 import com.newAds2021.adsmodels.AppPrefernce;
 import com.newAds2021.adsmodels.AppsDetails;
 import com.newAds2021.adsmodels.FBAPI;
 import com.newAds2021.adsmodels.IhAdsDetail;
 import com.newAds2021.adsmodels.ConstantAds;
+import com.newAds2021.adsmodels.ResponseDetails;
 import com.newAds2021.nativeadtemplate.TemplateView;
 
 import java.util.ArrayList;
@@ -396,18 +398,17 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
 
 
     public void getAppData() {
-         API.apiInterface().getAppData(ConstantAds.adUrlId,"AppData").enqueue(new retrofit2.Callback<AppsDetails>() {
+         AppDataAPI.apiInterface().getAppData(ConstantAds.adUrlId,"AppData").enqueue(new retrofit2.Callback<ResponseDetails>() {
             @Override
-            public void onResponse(@NonNull Call<AppsDetails> call, @NonNull Response<AppsDetails> response) {
+            public void onResponse(@NonNull Call<ResponseDetails> call, @NonNull Response<ResponseDetails> response) {
+                ResponseDetails responseDetails = response.body();
                 AppDataList = new ArrayList<>();
                 try {
-                    AppsDetails appsDetails = response.body();
+                    ArrayList<AppDataModel> appDetails = responseDetails.getAppData();
+                    AppDataModel app = appDetails.get(0);
+                    if (appDetails != null) {
 
-
-                    if (appsDetails != null) {
-
-                        AppDataModel app = AppDataList.get(0);
-                        if (AppDataList != null && AppDataList.size() > 0) {
+                        if (app != null && appDetails.size() > 0) {
                             appPrefernce.setAppDefaults(
                                     app.getShowMovies(), app.isShowTelegramBlog(),
                                     app.getShowWatchCricket(), app.getShowChannel(),
@@ -444,7 +445,7 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
             }
 
             @Override
-            public void onFailure(@NonNull Call<AppsDetails> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<ResponseDetails> call, @NonNull Throwable t) {
 
             }
         });
@@ -7116,8 +7117,5 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
             customTabsIntent.launchUrl(this, Uri.parse(appPrefernce.QurekaUrl3()));
         }
     }
-
-
-
 
 }

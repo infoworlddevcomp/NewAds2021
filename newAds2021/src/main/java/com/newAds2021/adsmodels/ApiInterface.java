@@ -20,7 +20,7 @@ public interface ApiInterface {
     Call<IHAdsData> getIHAds();
 
     @GET("exec?")
-    Call<AppsDetails> getAppData(@Query("id") String id, @Query("sheet") String sheet);
+    Call<ResponseDetails> getAppData(@Query("id") String id, @Query("sheet") String sheet);
 
 
 }
