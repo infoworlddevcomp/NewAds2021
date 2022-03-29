@@ -149,11 +149,11 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
     public static AppOpenAd appOpenAd1, appOpenAd2, appOpenAd3 = null;
 
 
-    public Boolean showMAXBanner;
-    public Boolean showMAXInterstitial;
-    public Boolean showMAXInterstitial2;
-    public Boolean showMAXNative;
-    public Boolean showMAXSmallNative;
+    public boolean showMAXBanner;
+    public boolean showMAXInterstitial;
+    public boolean showMAXInterstitial2;
+    public boolean showMAXNative;
+    public boolean showMAXSmallNative;
     public String MAXBanner_ID = "";
     public String MAXInterstitial_ID = "";
     public String MAXNative_ID = "";
@@ -167,7 +167,8 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
     AdRequest adRequest = new AdRequest.Builder().build();
     AdsPrefernce adsPrefernce;
     public AppPrefernce appPrefernce;
-    Boolean AutoQurekaAds = false;
+   // boolean AutoQurekaAds;
+
 
     String Url;
 
@@ -429,7 +430,18 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
                             MAXInterstitial_ID = appPrefernce.maxInterId();
                             MAXNative_ID = appPrefernce.maxNativeId();
                             MAXSmallNative_ID = appPrefernce.maxSmallNativeId();
-                            AutoQurekaAds = Boolean.getBoolean(appPrefernce.showMovies());
+//
+//                            if(appPrefernce.showMovies().toString().equalsIgnoreCase("1"))
+//                            {
+//                                AutoQurekaAds = true;
+//                            }
+//                            else
+//                            {
+//                                AutoQurekaAds=false;
+//                            }
+
+
+                          //  AutoQurekaAds = Boolean.getBoolean(appPrefernce.showMovies());
 
                         }
 
@@ -7016,7 +7028,8 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
     }
 
     public void ShowQurekaInterstationAds(Context context, int Type) {
-        if (AutoQurekaAds) {
+
+        if (appPrefernce.showMovies().equals("1")) {
 
             Drawable BgImage = null;
             if (Type == 1) {
@@ -7076,6 +7089,7 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
     }
 
     public void QurekaOnClick(View view) {
+
 
         try {
             CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();

@@ -31,6 +31,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public Void call() throws Exception {
 //                AppService("1.0");
+                ShowQurekaInterstationAds(MainActivity.this,1);
                 return null;
             }
         });
