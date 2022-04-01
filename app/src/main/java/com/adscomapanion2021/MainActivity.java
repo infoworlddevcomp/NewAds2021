@@ -32,9 +32,15 @@ public class MainActivity extends BaseActivity {
             public Void call() throws Exception {
 //                AppService("1.0");
                 ShowQurekaInterstationAds(MainActivity.this,1);
+
                 return null;
             }
         });
+
+
+
+
+
 //        setAdsUrlID("AKfycbwWa0oIwNsZ4b7b-aIGi61iyJ98XFCy2kbfXNC-ZhiIkHtlHu2R88r-gzHc7eigJykh7A/exec");
 //        ConstantAds.setAdsUrlID("AKfycbwWa0oIwNsZ4b7b-aIGi61iyJ98XFCy2kbfXNC-ZhiIkHtlHu2R88r-gzHc7eigJykh7A/exec");
 
@@ -73,6 +79,8 @@ public class MainActivity extends BaseActivity {
     }
 
     public void showBanner(View view) {
+
+      //  showMAXBanner();
         showLargeBanner3();
     }
 

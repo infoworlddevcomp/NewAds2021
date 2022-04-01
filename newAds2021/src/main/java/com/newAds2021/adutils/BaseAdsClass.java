@@ -51,6 +51,8 @@ import com.applovin.mediation.ads.MaxInterstitialAd;
 import com.applovin.mediation.nativeAds.MaxNativeAdListener;
 import com.applovin.mediation.nativeAds.MaxNativeAdLoader;
 import com.applovin.mediation.nativeAds.MaxNativeAdView;
+import com.applovin.sdk.AppLovinSdk;
+import com.applovin.sdk.AppLovinSdkConfiguration;
 import com.bumptech.glide.Glide;
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdOptionsView;
@@ -151,7 +153,7 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
 
     public boolean showMAXBanner;
     public boolean showMAXInterstitial;
-    public boolean showMAXInterstitial2;
+    public String showMAXInterstitial2;
     public boolean showMAXNative;
     public boolean showMAXSmallNative;
     public String MAXBanner_ID = "";
@@ -208,6 +210,14 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        AppLovinSdk.getInstance(this).setMediationProvider("max");
+        AppLovinSdk.initializeSdk(this, new AppLovinSdk.SdkInitializationListener() {
+            @Override
+            public void onSdkInitialized(final AppLovinSdkConfiguration configuration) {
+                // AppLovin SDK is initialized, start loading ads
             }
         });
 
@@ -423,7 +433,7 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
 
                             showMAXBanner = appPrefernce.showMaxBanner();
                             showMAXInterstitial = appPrefernce.showMaxInter();
-                            showMAXInterstitial2 = adsPrefernce.showRewardInter3();
+                            showMAXInterstitial2 = adsPrefernce.extrapara4();
                             showMAXNative = appPrefernce.showMaxNative();
                             showMAXSmallNative = appPrefernce.showMaxSmallNative();
                             MAXBanner_ID = appPrefernce.maxBannerId();
@@ -6799,7 +6809,6 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
         if (showMAXNative) {
             FrameLayout nativeAdContainer = findViewById(R.id.MAX_native_ad_layout);
 
-
             nativeAdContainer.setBackgroundColor(getResources().getColor(R.color.white));
             nativeAdContainer.setVisibility(View.VISIBLE);
             nativeAdLoader = new MaxNativeAdLoader(MAXNative_ID, this);
@@ -6875,6 +6884,7 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
 
     public void loadMAXInterstitial() {
         if (showMAXInterstitial) {
+
             interstitialAd = new MaxInterstitialAd(MAXInterstitial_ID, this);
             interstitialAd.setListener(new MaxAdListener() {
                 @Override
@@ -6920,7 +6930,7 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
     }
 
     public void loadMAXInterstitial2() {
-        if (showMAXInterstitial2) {
+        if (showMAXInterstitial2.equals("1")) {
             interstitialAd = new MaxInterstitialAd(MAXInterstitial_ID, this);
             interstitialAd.setListener(new MaxAdListener() {
                 @Override
@@ -6997,7 +7007,7 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
     }
 
     public void showMAXInterstitial2(Callable<Void> callable) {
-        if (showMAXInterstitial2) {
+        if (showMAXInterstitial2.equals("1")) {
             if (interstitialAd.isReady()) {
                 try {
                     interstitialAd.showAd();
