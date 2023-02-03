@@ -1,0 +1,31 @@
+
+--> for Banner
+        layout="@layout/banner_ad_layout"
+        showBanner1()  showBanner2()  showBanner3()
+        showLargeBanner1()  showLargeBanner2()  showLargeBanner3()
+--> for Native
+        layout="@layout/native_ad_layout_small"
+        layout="@layout/native_ad_layout"
+        showNativeAd1()  showNativeAd2()  showNativeAd3()
+--> BaseActivity
+        ConstantAds.setAdsUrlID("https://script.google.com/macros/s/AKfycbwWa0oIwNsZ4b7b-aIGi61iyJ98XFCy2kbfXNC-ZhiIkHtlHu2R88r-gzHc7eigJykh7A/");
+        ConstantAds.setIHAdsID("https://script.google.com/macros/s/AKfycbwV0QJZQ0bg6w_Rqc4w84OFv4cUSI_YZuKKd-exgyFzw-lXSyJ6vbV8-cT1kUBc4MZWwA/");
+        ConstantAds.preloadAppopen(true);
+        ConstantAds.preloadInterstitial(true);
+--> AppService
+        --> In Activity After Splash
+        AppService(String versionName) //for update, notification & ads
+        --> In Any Activity
+        AppAdDialog() // only for app dialog
+--> Native ad for Dialog
+        showNativeAdDialog(Dialog dialog)
+--> Validate Install
+        validateInstall(new Callable<Void>() {
+            @Override
+            public Void call() throws Exception {
+                toast("invalid");
+
+                return null;
+            }
+        });
+
