@@ -1194,7 +1194,7 @@ public class BaseAdsClass extends AppCompatActivity implements NetworkStateRecei
                 }
             });
 
-            btn_ad_install_native.setOnClickListener(new View.OnClickListener() {
+            lay_native_ad.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     // open link
