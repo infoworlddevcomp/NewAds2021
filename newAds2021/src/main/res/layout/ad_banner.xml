@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white"
+    android:id="@+id/lay_banner_ad"
+    android:visibility="gone"
+    android:layout_gravity="center"
+    android:gravity="center_vertical|center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:padding="2dp"
+        android:weightSum="2"
+        android:layout_alignParentStart="true"
+        android:id="@+id/lay_info"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp">
+
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/iv_ads"
+            android:layout_width="20.0dip"
+            android:layout_height="20.0dip"
+            android:src="@drawable/ic_ads"
+            app:tint="@android:color/holo_blue_dark" />
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/iv_banner_info"
+            android:layout_width="20.0dip"
+            android:layout_height="20.0dip"
+            android:src="@drawable/ic_info_ad" />
+        <ImageView
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/iv_close_ad_banner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_close_black_ad" />
+
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:layout_toEndOf="@id/lay_info"
+        android:id="@+id/iv_ad_icon_banner"
+        android:layout_margin="5dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"/>
+
+    <RelativeLayout
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:layout_toStartOf="@id/tv_install_btn_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0.0dip"
+        android:layout_marginEnd="5.0dip"
+        android:layout_toEndOf="@id/iv_ad_icon_banner"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:visibility="visible"
+            android:id="@+id/lay_first"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit ="marquee_forever"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:scrollHorizontally="true"
+                android:id="@+id/tv_banner_ad_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="3dp"
+                android:text="App Name / TitleApp Name / TitleApp Name / Title"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit ="marquee_forever"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:scrollHorizontally="true"
+                android:id="@+id/tv_banner_ad_subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_banner_ad_title"
+                android:paddingTop="3dp"
+                android:text="Short DescriptionShort DescriptionShort Description"
+                android:textColor="@color/semi_gray_ad"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/lay_second"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit ="marquee_forever"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:scrollHorizontally="true"
+                android:gravity="center_vertical"
+                android:id="@+id/tv_banner_extra_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|center_vertical"
+                android:text="Download Now..."
+                android:textColor="@color/semi_gray_ad"
+                android:textSize="14sp" />
+
+
+            <LinearLayout
+                android:layout_below="@id/tv_banner_extra_text"
+                android:layout_marginTop="3dp"
+                android:layout_centerVertical="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <RatingBar
+                    android:layout_gravity="center|center_vertical"
+                    android:id="@+id/iv_banner_star_rating"
+                    android:gravity="center_vertical"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:numStars="5"
+                    android:stepSize="0.5"
+                    android:rating="4"
+                    android:isIndicator="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_banner_review_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|center_vertical"
+                    android:maxLines="2"
+                    android:text="  ( 25,325 )"
+                    android:textColor="@color/semi_gray_ad"
+                    android:textSize="14sp" />
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:id="@+id/tv_install_btn_banner"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="5dp"
+        android:background="@drawable/gnt_button_bg"
+        android:elevation="6.0dip"
+        android:maxLines="2"
+        android:padding="10dp"
+        android:paddingTop="3dp"
+        android:text="Install"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+
+
+</RelativeLayout>

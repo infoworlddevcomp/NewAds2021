@@ -1,0 +1,53 @@
+<resources>
+
+
+    //NewAdsCompanion2021
+    <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="admob_banner_id1">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admob_banner_id2">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admob_banner_id3">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admob_inter_id1">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="admob_inter_id2">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="admob_inter_id3">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="admob_app_open_id1">ca-app-pub-3940256099942544/3419835294</string>
+    <string name="admob_app_open_id2">ca-app-pub-3940256099942544/3419835294</string>
+    <string name="admob_app_open_id3">ca-app-pub-3940256099942544/3419835294</string>
+    <string name="admob_native_id1">ca-app-pub-3940256099942544/2247696110</string>
+    <string name="admob_native_id2">ca-app-pub-3940256099942544/2247696110</string>
+    <string name="admob_native_id3">ca-app-pub-3940256099942544/2247696110</string>
+    <string name="admob_rewarded_id1">ca-app-pub-3940256099942544/5224354917</string>
+    <string name="admob_rewarded_id2">ca-app-pub-3940256099942544/5224354917</string>
+    <string name="admob_rewarded_id3">ca-app-pub-3940256099942544/5224354917</string>
+    <string name="admob_rewarded_inter_id1">ca-app-pub-3940256099942544/5354046379</string>
+    <string name="admob_rewarded_inter_id2">ca-app-pub-3940256099942544/5354046379</string>
+    <string name="admob_rewarded_inter_id3">ca-app-pub-3940256099942544/5354046379</string>
+
+    <string name="fb_inter_id1">YOUR_PLACEMENT_ID</string>
+
+    <string name="privacy_inhouse">This Ad is servered by Developer of this app, We do not take any personal or identificable information of our user while showing this ad. Our User\'s Privacy is our topmost priority.\n
+    \nYou can check Application\'s Privacy Policy for more Information.\n\nNote: Google, Google Play Store and Play Store Logo is trademark of Google Inc.</string>
+
+    <string name="app_terms_policies"><![CDATA[App Terms & Policies]]></string>
+    <string name="show_movies">1</string>
+    <string name="Qureka_Url">https://406.game.qureka.com/</string>
+
+    <string name="AppPassword">INDIA</string>
+
+    <string name="showWatchCricket">1</string>
+
+    <string name="showChannel">1</string>
+
+    <string name="my_preference">fristtime</string>
+
+    <string name="my_preference_key">abc</string>
+
+    <string name="telegram_Channel_link">https://t.me/ztvsports</string>
+
+    <string name="Privecy_policy_url">https://freepikashow.blogspot.com/p/free-pikashow.html</string>
+
+    <string name="Channel_Blog_URl">https://tvchannelurl.blogspot.com/p/tvchannelurl.html</string>
+
+    <string name="Get_Password_Url">https://tvchannelurl.blogspot.com/p/application-password.html</string>
+
+
+</resources>
